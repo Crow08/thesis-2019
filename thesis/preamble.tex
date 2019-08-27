@@ -6,33 +6,34 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{lmodern}
+\usepackage{pdfpages}
 
 % ##################################################
 % Dokumentvariablen
 % ##################################################
 
 % Persoenliche Daten
-\newcommand{\docNachname}{Mustermann}
-\newcommand{\docVorname}{Max}
-\newcommand{\docStrasse}{Straße}
-\newcommand{\docOrt}{Ort}
-\newcommand{\docPlz}{123456}
-\newcommand{\docEmail}{student@hs-furtwangen.de}
-\newcommand{\docMatrikelnummer}{000000}
+\newcommand{\docNachname}{Hertfelder}
+\newcommand{\docVorname}{Kevin}
+\newcommand{\docStrasse}{Maurener Weg 159}
+\newcommand{\docOrt}{Böblingen}
+\newcommand{\docPlz}{71034}
+\newcommand{\docEmail}{kevin.hertfelder@hs-furtwangen.de}
+\newcommand{\docMatrikelnummer}{253422}
 
 % Dokumentdaten
-\newcommand{\docTitle}{TITEL}
+\newcommand{\docTitle}{Anwendung von Hashchain Technologien zur kryptografischen Absicherung von Auditdaten.}
 %\newcommand{\docUntertitle}{} % Kein Untertitel
-\newcommand{\docUntertitle}{UNTERTITEL}
+\newcommand{\docUntertitle}{}
 % Arten der Arbeit: Bachelorthesis, Masterthesis, Seminararbeit, Diplomarbeit
-\newcommand{\docArtDerArbeit}{ART DER ARBEIT}
+\newcommand{\docArtDerArbeit}{Bachelorthesis}
 %Studiengaenge: Allgemeine Informatik Bachelor, Computer Networking Bachelor,
 % Software-Produktmanagement Bachelor, Advanced Computer Scinece Master
-\newcommand{\docStudiengang}{STUDIENGANG}
-\newcommand{\docAbgabedatum}{11.11.2011}
-\newcommand{\docErsterReferent}{ERSTER REFERENT}
+\newcommand{\docStudiengang}{Allgemeine Informatik Bachelor}
+\newcommand{\docAbgabedatum}{31.08.2019}
+\newcommand{\docErsterReferent}{Prof. Dr. Lothar Piepmeyer}
 %\newcommand{\docZweiterReferent}{-} % Wenn es nur einen Betreuer gibt
-\newcommand{\docZweiterReferent}{ZWEITER REFERENT}
+\newcommand{\docZweiterReferent}{M. Sc. Thomas Grammetbauer}
 
 % ##################################################
 % Allgemeine Pakete
@@ -51,7 +52,7 @@
 
 % Farben
 \usepackage{color}
-\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{xcolor}
 
 % Maskierung von URLs und Dateipfaden
 \usepackage[hyphens]{url}
@@ -71,15 +72,15 @@
 % Seitenformatierung
 % ##################################################
 \usepackage[
-	portrait,
-	bindingoffset=1.5cm,
-	inner=2.5cm,
-	outer=2.5cm,
-	top=3cm,
-	bottom=2cm,
-	%showframe, %Aktivieren um Seitengrenzen anzuzeigen
-	%includeheadfoot
-	]{geometry}
+    portrait,
+    bindingoffset=1.5cm,
+    inner=2.5cm,
+    outer=2.5cm,
+    top=3cm,
+    bottom=2cm,
+    %showframe, %Aktivieren um Seitengrenzen anzuzeigen
+    %includeheadfoot
+    ]{geometry}
 
 % ##################################################
 % Kopf- und Fusszeile
@@ -107,8 +108,8 @@
 
 %Kein "Kapitel # NAME" in der Kopfzeile
 \renewcommand{\chaptermark}[1]{
-	\markboth{#1}{}
-   	\markboth{\thechapter.\ #1}{}
+    \markboth{#1}{}
+    \markboth{\thechapter.\ #1}{}
 }
 
 % ##################################################
@@ -264,13 +265,15 @@
 %Code auschnitt importieren aus datei
 %\mylisting{from}{to}{language}{file}{descr}{path}
 \newcommand{\mylisting}[6]{
-\lstinputlisting[language=#3,
-				firstnumber=#1,
-				firstline=#1,
-				lastline=#2,
-				caption={#4, #5}, 
-				label={implementation_listing_#4_#5}]
-				{#6}
+\lstinputlisting[
+    language=#3,
+    firstnumber=#1,
+    firstline=#1,
+    lastline=#2,
+    caption={#4, #5}, 
+    breaklines=false,
+    label={implementation_listing_#4_#5}]
+    {#6}
 }
 
 % ##################################################
@@ -287,20 +290,13 @@
 \renewcommand{\appendixtocname}{Anhänge}
 
 %Befehl für einen neuen Bericht und die erste seite als bild
-\newcommand{\appendixsection}[2]{
-\section{#1}
-\appendixsingle{#2}
+\newcommand{\appendMultiPdfsection}[2]{
+\includepdf[pages=1,scale=0.9,offset=0 -1.5cm,pagecommand={\section{#1}}]{#2}
+\includepdf[pages=2-,scale=0.9]{#2}
 }
 
-%Befehl für einzelne seite als bild eingefasst, damit überschrift und kopfzeile
-% bestehen bleibt. 
-\newcommand{\appendixsingle}[1]{
-\vspace{-10cm}
-\vfill
-\mbox{}\hspace{-1.5cm}\includegraphics[width=\linewidth+3cm]{#1}\hspace{-1.5cm}\mbox{}
-\vspace{-10cm}
-\vfill
-\mbox{}
+\newcommand{\appendSinglePdfsection}[2]{
+\includepdf[pages=1,scale=0.9,offset=0 -1.5cm,pagecommand={\section{#1}}]{#2}
 }
 
 %Datenträger Tabelle
@@ -311,7 +307,7 @@
 % ##################################################
 % Theoreme
 % ##################################################
-  	
+
 % Umgebung fuer Beispiele
 \newtheorem{beispiel}{Beispiel}
 
@@ -320,12 +316,13 @@
 
 % Umgebung fuer Definitionen
 \newtheorem{definition}{Definition}
-  	
+
 % ##################################################
 % Literaturverzeichnis
 % ##################################################
 
 \usepackage{bibgerm}
+\bibliographystyle{plain}
 
 % ##################################################
 % Abkuerzungsverzeichnis
@@ -338,11 +335,11 @@
 % ##################################################
 
 \usepackage[
-	colorlinks=false,
-   	linkcolor=black,
-   	citecolor=black,
-  	filecolor=black,
-	urlcolor=black,
+    colorlinks=false,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black,
     bookmarks=true,
     bookmarksopen=true,
     bookmarksopenlevel=3,

@@ -1,0 +1,47 @@
+\chapter{Einleitung}
+
+Diese Thesis wurde mit Unterstützung der Firma levigo erstellt. Das im Rahmen der Thesis entstandene Softwaremodul kommt in einer neuen Softwarelösung zum Einsatz, die sich zum Zeitpunkt dieser Arbeit in Entwicklung befindet (Stand 08/2019).
+
+\section{Die Unternehmensgruppe levigo}
+Die levigo Gruppe ist eine auf \acs{IT}-Dienstleistungen und Software-Komponenten für das \acs{ECM}-Umfeld spezialisierte Unternehmensgruppe. Sie wurde 2001 bei einem Zusammenschluss von BMS (Bill Mair Software) und cogito Informationssysteme GmbH gegründet. Cogito war ebenfalls eine Unternehmensgruppe, die 1997, aus dem Zusammenschluss von Procon Systems GbR und cogito Gesellschaft für Elektronikentwicklung mbH, gegründet wurde.\\
+levigo beschäftigt rund 80 Mitarbeiter und besitzt neben dem Hauptstandort Holzgerlingen noch zwei weitere Betriebstätten in Backnang. Die Firma ist Mitglied des Softwarezentrums Böblingen / Sindelfingen.\\
+Die Unternehmensgruppe levigo teilt sich in drei Firmen auf: levigo holding ist das Dachunternehmen der Gruppe und übernimmt die Administration der Tochterunternehmen. Ihr Zuständigkeitsbereich sind alle Personalangelegenheiten, Fragen des Rechts, Controlling und Finanzen. Des Weiteren kümmert sich levigo holding um die Infrastruktur und Betriebsmittel der anderen Firmen.\\
+levigo systems ist spezialisiert auf Client-Server-Anwendungen mit Virtualisierung, Storage und kontinuierlicher Verfügbarkeit. Sie bieten Komplettlösungen für Hardware-Konzeption und \acs{IT} Ausstattung aus einer Hand. Der Aufbau und die Optimierung von Firmennetzwerken und der \acs{IT}-Infrastruktur mittelständischer Unternehmen, ist die Kernkompetenz der Firma. Zusätzlich werden Dienstleistungen im Bereich \acs{IT}-Sicherheit angeboten. Angebotene Cloud-Dienste werden auf eigenen Servern in Süddeutschland betrieben.\\
+levigo solutions bietet mit den jadice Softwareprodukten integrationsfreundliche und flexible Java-Komponenten für das \acs{ECM}-Umfeld an. Die Produkte ermöglichen plattformunabhängige Verarbeitung und Anzeige aller gängigen Archivierungs- und Officeformate. Zudem bietet levigo solutions mit den jadice Komponenten Lösungen für Kundenportale, Postkorblösungen, Rechercheclients und Datenmigrationsprozesse. Mit der neuen Produktlinie neverpile werden Teilgebiete des Geschäftsprozessmanagement (\acs{GPM}) abgedeckt.\cite{1}
+
+\section{neverpile eureka}
+Im Rahmen dieser Thesis wird ein Audit-Log-System implementiert und diskutiert. Das Audit-Log-System wird in "`neverpile eureka"' integriert.\\
+neverpile eureka ist ein schlankes Enterprise Content Management System zur (Langzeit-) Archivierung von Dokumenten und anderen geschäftsrelevanten Artefakten. Die Software folgt dem "`\acs{API}-first-Prinzip"' und beschränkt sich auf wesentliche Kernfunktionalitäten. Alle weitergehenden kundenspezifischen Funktionen können modular ergänzt werden. Die modulare Struktur erlaubt eine einfache Integrierbarkeit in bestehende Systeme und Anbindung an beliebige externe Ressourcen. Auch sollen im Rahmen von neverpile eureka keine bereits gelösten Teilprobleme neu implementiert werden. Bereits existierende Lösungen für Teilprobleme werden eingebunden, nicht ersetzt. Die Software ist ein auf Container- und Clusterumgebung ausgelegtes System, welches dynamisch skalierbar und damit flexibel an Anforderungen angepasst werden kann. 
+Zu den Spezifikationen von neverpile eureka gehört auch die Auditierung von Dokumenten. Diese wird im Rahmen dieser Thesis entworfen und implementiert.
+
+\section{Audit-Logs}
+Unternehmen und größere Organisationen führen Audit-Logs, um Ereignisse in ihren Informationssystemen langfristig festzuhalten. So gespeicherte Informationen dienen der Nachvollziehbarkeit interner Prozesse und ermöglichen deren Überwachung. Neben unternehmensinterner Prozesskontrolle und Auditierungsvorgaben kommen in vielen Geschäftsbereichen gesetzliche Vorgaben und Regelungen hinzu. Speziell die gesetzlichen Vorgaben verpflichten Unternehmen, Auskunft über verschiedene Informationen geben zu können\cite{8280477}. \\
+Audit-Logs können beliebige Arten von Ereignissen dokumentieren. In dieser Thesis wird die Auditierung von Dokumentendaten in Langzeit-Archivsystemen betrachtet. Es soll ermöglicht werden, den kompletten Lebenszyklus sensibler Daten zu rekonstruieren. Alle Änderungen an einem Dokument werden zusammen mit Informationen zu den verantwortlichen oder beteiligten Akteuren festgehalten. Der Auditierungsvorgang prüft dann die Konsistenz und Authentizität der protokollierten Events.\\
+Ein Audit-Log besteht aus uniformen Audit-Events, die eine inhärente Ordnung benötigen. Audit-Events können unterschiedliche Informationen enthalten und individuell an die jeweiligen Anforderungen angepasst werden. Die Anforderungen ergeben sich aus dem angestrebten Auditierungsprozess. Der Auditierungsprozess beschreibt den eigentlichen Nutzen des Audit-Logs. In diesem wird das Audit-Log ausgewertet und Informationen aggregiert oder gefiltert, um allgemeine Aussagen über Prozesse des Systems zu erhalten.\cite{7118074} Einträge in Audit-Logs müssen aussagekräftig genug sein, um alle Anforderungen einer späteren Auditierung zu erfüllen. Dem entgegen steht das Prinzip der Datensparsamkeit, die besagt, dass nur die notwendigsten Informationen dauerhaft gespeichert werden sollen.\cite{2458973}\\
+Im Falle der Auditierung von Geschäftsdokumenten enthält ein Eintrag Informationen über die Akteure, die an dem Event beteiligt sind. Dabei ist insbesondere die eindeutige Identität des ausführenden Benutzers wichtig. Auch das tatsächliche Subjekt des Events, das betroffene Dokument, muss eindeutig identifizierbar sein. Die Art der Datenmanipulation und gegebenenfalls der Inhalt der Änderung muss ebenfalls festgehalten werden. Durch Festhalten des Zeitpunkts des Events, können alle Änderungen eines Dokuments in chronologische Reihenfolge gebracht werden. Interessant sind außerdem Kontextinformationen, wie die auslösende Schnittstelle und das Resultat des Events, das über Erfolg oder Fehlschlag informiert.\cite{7118074}\\
+Über das Audit-Log kann somit jede Änderung der auslösenden Schnittstelle bzw. dem auslösenden Bearbeiter zugeordnet werden. So kann die Ursache für fehlerhafte oder manipulierte Dokumente nachvollzogen werden.\\
+Unautorisierte Manipulationen können durch einen Abgleich des Ist-Zustands mit dem, im Audit-Log verifizierten, Soll-Zustands entdeckt werden. Da das Audit-Log so zu einer Validierungsinstanz wird, ist es ein potenzielles Ziel für Angriffe und Manipulation und muss entsprechend geschützt werden. Ein Angreifer kann durch Manipulation des Audit-Logs versuchen Änderungen oder Löschung von Dokumenten zu vertuschen oder falsche Schuldzuweisungen zu konstruieren. Besonders in Systemen, die ihre Datenspeicherung auslagern, z.B. in Cloud Storage Lösungen, ist es wichtig zu garantieren, dass die so bezogenen Daten nicht manipuliert wurden.\cite{6726483}\\
+Um ads Audit-Log vor Manipulation zu schützen, gibt es verschiedene Herangehensweisen. In dieser Thesis wird eine Kombination digitaler Signaturen und manipulationssicheren Datenstrukturen betrachtet. Die digitalen Signaturen dienen dabei als vertrauenswürdige Ankerpunkte und die verwendete Datenstruktur soll vor Manipulationen interner und externer Quellen schützen.
+
+\subsection{Audit-Log Anforderungen}
+Die Anforderungen an das Audit-Log-System für neverpile eureka sind folgende:
+\begin{itemize}
+\item Erfassung aller relevanten Ereignisse von Dokumenten.\\
+Die erfassten Daten enthalten: Zeitstempel, \acs{REST}-Schnittstellen URL, beteiligte Plugins (Facets), Änderungstyp, Ergebnis, Benutzerkennung, Dokumenten-Hash und Dokumenten-Id.
+\item Audit-Log über alle Events.\\
+Zusammenhängendes Audit-Log über alle modifizierenden Events aller Dokumente.
+\item Audit-Log Events bezüglich eines einzeln Dokuments.\\
+Zusammenhängendes Log mit allen modifizierenden Events eines einzelnen Dokuments.
+\item Überprüfbarkeit der Integrität.\\
+Die Integrität jedes Audit-Logs und jeder Teilausschnitt des Audit-Logs kann geprüft und bestätigt werden.
+\item Verifikation eines Dokuments.\\
+Der aktuelle Stand eines Dokuments muss über das Audit-Log verifiziert werden können.
+\item Verifikation einzelner Audit-Events.\\
+Jedes Audit-Event muss über seinen Inhalt verifizierbar sein.
+\item Vollumfängliche Verifikation.\\
+Ein effizientes Verfahren zur Verifikation aller Audit-Events wird benötigt.
+\item Skalierbarkeit und synchronisierter Betrieb über mehrere neverpile Instanzen.\\
+Der Betrieb über mehrere Container Instanzen muss ermöglicht werden und dynamisch skalierbar sein.
+\item \acs{REST}-Schnittstelle.\\
+Jede Funktion des Audit-Logs muss über eine \acs{REST}-Schnittstelle zugänglich sein.
+\end{itemize}

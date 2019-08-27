@@ -14,7 +14,6 @@ asdf
 \section{Beispielabbildungen}
 
 \lipsum[10]
-
 \begin{wrapfigure}{rt}{8cm}
 \caption{Bildüberschrift}
 \centering
@@ -22,7 +21,6 @@ asdf
 Quelle: \cite{s11wasml}
 \label{pic:bild2}
 \end{wrapfigure}
-
 \lipsum[10]
 
 \begin{figure}
@@ -50,7 +48,7 @@ Val4 & Val5 & Val6 \\
 
 \section{Listings}
 
-\begin{lstlisting}[language=java, caption=Hallo Welt in Java]
+\begin{lstlisting}[language=java, breaklines=false, caption=Hallo Welt in Java]
 public class HalloWelt 
 {
 	public static void main(String[] args) 
@@ -66,7 +64,7 @@ public class HalloWelt
 
 \section{Abkürzungen}
 
-Im Abkürzungsverzeichnis stehende Abkürzungen können in Langform (\ac{HFU}) oder in Kurzform (\acs{HFU}) angegeben werden.
+Im Abkürzungsverzeichnis stehende Abkürzungen können in Langform (\acs{HFU}) oder in Kurzform (\acs{HFU}) angegeben werden.
 
 \section{Abgesetztes wörtliches Zitat}
 
@@ -99,3 +97,16 @@ Unter dem Begriff \dots verstehen wir \dots
 \end{definition}
 
 \lipsum[2]
+
+\begin{figure}
+\caption{Einfügen über absoluten pfad}
+\includegraphics[width=1\textwidth]{content/pictures/hfu}
+\label{pic:bild3}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=13cm]{content/pictures/hfu.jpg}
+	\caption{Einfügen mit direktem Pfad}
+	\label{La12bel}
+\end{figure}

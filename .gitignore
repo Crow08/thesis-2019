@@ -35,17 +35,7 @@
 *.vrb
 *.xdy
 *.tdo
-
-#################
-## Misc Files
-#################
-
-.DS_Store
 /tmp/
-*BUILD.pdf
-*.swp
-*.sublime-project
-*.sublime-workspace
 
 #################
 ## Eclipse Files
@@ -55,4 +45,10 @@
 .project
 .texlipse
 
+#################
+## Thesis
+#################
+
 *.pdf
+!/thesis/content/attachments/*.pdf
+

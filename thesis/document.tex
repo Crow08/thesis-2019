@@ -1,14 +1,14 @@
 \documentclass[
-	12pt,
-	a4paper,
-	bibliography=totoc,
-	cleardoublepage=em, 
-	index=totoc,
-	ngerman,
-	openright,
-	final,
-	listof=nochaptergap,
-	]{scrbook}
+    12pt,
+    a4paper,
+    bibliography=totoc,
+    cleardoublepage=em, 
+    index=totoc,
+    ngerman,
+    openright,
+    final,
+    listof=nochaptergap,
+]{scrbook}
 \usepackage{scrhack}
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
@@ -53,10 +53,6 @@
 \listoftables
 \cleardoubleemptypage
 
-% Quellcodeverzeichnis einbinden und ins Inhaltsverzeichnis
-\phantomsection
-\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
-
 %Define listing
 \makeatletter
 \begingroup\let\newcounter\@gobble\let\setcounter\@gobbletwo
@@ -69,26 +65,19 @@
 \renewcommand{\cftlistingsafterpnum}{\vskip0pt} %Spacing between entries
 \renewcommand*{\cftlistingspresnum}{\lstlistingname~}
 \settowidth{\cftlistingsnumwidth}{\cftlistingspresnum}
-\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
-% Tabellenverzeichnis anpassen
-\renewcommand{\lstlistingname}{Codeauschnitt}
-\renewcommand{\cftlistingsaftersnum}{:}
-% Breite des Nummerierungsbereiches [Codeauschnitt 1:]
-\newlength{\codeLength}
-\settowidth{\codeLength}{\bfseries\lstlistingname\cftlistingsaftersnum}
-\addtolength{\codeLength}{5mm}
-\setlength{\cftlistingsnumwidth}{\codeLength}
-\lstlistoflistings
-\cleardoubleemptypage
+
 
 % Abkürzungsverzeichnis
 \include{content/framework/abbreviations}
 
 \mainmatter
 
-\include{content/chapters/0_introduction}
-\include{content/chapters/1_basics}
-\include{content/chapters/2-7_custom_chapter}
+\include{content/chapters/1_introduction}
+\include{content/chapters/2_basics}
+\include{content/chapters/3_laws_guidelines}
+\include{content/chapters/4_vunreabillity}
+\include{content/chapters/5_solution}
+\include{content/chapters/6_architecture}
 \include{content/chapters/8_prospect} 
 \include{content/chapters/9_conclusion}
 
@@ -111,7 +100,9 @@
 \chapter{Monatsberichte}
 Nun folgen die Monatsberichte.
 \newpage
-\appendixsection{Monatsbericht Februar}{content/attachments/report.pdf}
-\appendixsection{Monatsbericht Januar}{content/attachments/report.pdf}
+\appendMultiPdfsection{Monatsbericht März}{content/attachments/Monatsbericht_Abschlussarbeit_1.pdf}
+\appendMultiPdfsection{Monatsbericht April}{content/attachments/Monatsbericht_Abschlussarbeit_2.pdf}
+\appendSinglePdfsection{Monatsbericht Mai}{content/attachments/Monatsbericht_Abschlussarbeit_3.pdf}
+\appendSinglePdfsection{Monatsbericht Juni}{content/attachments/Monatsbericht_Abschlussarbeit_4.pdf}
 \end{appendices}
-\end{document}      
+\end{document}
